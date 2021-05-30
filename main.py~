@@ -1,0 +1,54 @@
+# Python script to convert the given image
+# into a dotted text using opencv
+
+# import the required modules
+import cv2
+# from PIL import Image
+import numpy as np
+# Read the image
+from PIL import Image
+img = cv2.imread('1.jpg', 0)
+
+# Apply median blur
+img = cv2.medianBlur(img, 5)
+image = cv2.adaptiveThreshold(
+    img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+
+# Apply MEAN thresholding to get refined edges
+s= image.shape
+
+cv2.imshow("iamge",img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+cv2.imshow("iamge",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+# Convert the image into a compatible size
+# We will use 60 pixels wide image so that text
+# fits in the console
+'''
+# Preserve the ratio
+ratio = len(image)/len(image[0])
+# Assign new width and calculate new height
+new_width = 60
+new_height = int((ratio)*new_width)
+# Resize the image
+image = cv2.resize(image, (new_height, new_width))
+#print(image)
+# Iterate over the array and print the dark pixels
+# or we can use any other symbol too.
+k=1
+'''
+k=1
+new = np.full(s,255)
+for i in range(s[0]):
+    for j in range(s[1]):
+        if image[i,j] > 100:
+            new[i,j] = 0
+
+        #print(image[i,j],end='')
+
+    print()
+
+data = Image.fromarray(new)
+data.save('d.png')
