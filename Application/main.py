@@ -1,3 +1,4 @@
+import cv2
 import tkinter as tk
 from PIL import Image, ImageTk
 
@@ -13,72 +14,83 @@ some style too.
 
 # Creating Master
 root = tk.Tk()
+root.title("Image Converter to Dotted Puzzle")
 
 # Defining size for the window
-size = (1250, 515) # do not change this values as they are static
-root.geometry(f'{size[0]}x{size[1]}')
+size = (1430, 515)  # do not change this values as they are static
+
+root.minsize(width=size[0], height=size[1])
 
 
 # some constant static variables
-top_labels_height = 25     # Top Label Height
-button_height = 5          # button height
+top_labels_height = 40     # Top Label Height
+button_height = 2      # button height
 image_frames_height = 400  # image frame height
 
 # setting an example file (.anyImage file)
 file_path = "test_images//car.jpg"
 
 
-top_labels = tk.LabelFrame(root, width = size[0],
- height = top_labels_height).grid(row = 0, column = 0, columnspan = 2)
+top_labels = tk.LabelFrame(root,  width=size[0], height=top_labels_height, bg='white').grid(
+    row=0, column=0, columnspan=4)
 
-tk.Label(top_labels, text = "Original Image").grid(row = 0, column = 0)
-tk.Label(top_labels, text = "Puzzled Image").grid(row = 0, column = 1)
-
+tk.Label(top_labels, text="Original Image",
+         fg='black', bg='white', font=("Helvetica")).grid(row=0, column=0)
+tk.Label(top_labels, text="Black and White Image",
+         fg='black', bg='white', font=("Helvetica")).grid(row=0, column=1)
+tk.Label(top_labels, text="Puzzled Image",
+         fg='black', bg='white', font=("Helvetica")).grid(row=0, column=2)
 
 
 image_frames = [
-		tk.LabelFrame(root, width = size[0]//2,
-		 height = image_frames_height).grid(row = 1, column = 0),
-		tk.LabelFrame(root, width = size[0]//2,
-		 height = image_frames_height).grid(row = 1, column = 1),
-	]
-
+    tk.LabelFrame(root, width=size[0]//3,
+                  height=image_frames_height).grid(row=1, column=0),
+    tk.LabelFrame(root, width=size[0]//3,
+                  height=image_frames_height).grid(row=1, column=1),
+    tk.LabelFrame(
+        root, width=size[0]//3, height=image_frames_height).grid(row=1, column=2)
+]
 
 
 images = [
-		tk.Label(image_frames[0],),
-		tk.Label(image_frames[1],),
-	]
+    tk.Label(image_frames[0], width=size[0]//3),
+    tk.Label(image_frames[1], width=size[0]//3),
+    tk.Label(image_frames[2], width=size[0]//3)
+]
 
 # Please do correct ----------------------------------------------------
 # def load_image(path):
 # 	global images
 # 	img = ImageTk.PhotoImage(Image.open(path).resize((size[0]//2,
- # image_frames_height), Image.ANTIALIAS))
+# image_frames_height), Image.ANTIALIAS))
 # 	images[0].config(image = img)
 
 
 # def generate_image(path):
 # 	global images
 # 	img = ImageTk.PhotoImage(Image.open(path).resize((size[0]//2,
- # image_frames_height), Image.ANTIALIAS))
+# image_frames_height), Image.ANTIALIAS))
 # 	images[1].config(image = img)
 # -------------------------------------------------------------------------------------------------------
 
 # Loading Image
-img = ImageTk.PhotoImage(Image.open(file_path).resize((size[0]//2,
- image_frames_height), Image.ANTIALIAS))
+img = ImageTk.PhotoImage(Image.open(file_path).resize((size[0]//3,
+                                                       image_frames_height), Image.ANTIALIAS))
 
-tk.Button(root, text = "Load Image", width = 88,
- height = button_height).grid(row = 2, column = 0),
-tk.Button(root, text = "Generate Image", width = 88,
- height = button_height).grid(row = 2, column = 1)
+tk.Button(root, text="Load Image", width=43,
+          height=button_height, bg='#FF9671', font=("Helvetica")).grid(row=2, column=0),
+tk.Button(root, text="Black and White", width=43,
+          height=button_height, bg='#FFC1B3', font=("Helvetica")).grid(row=2, column=1)
+tk.Button(root, text="Generate Image", width=43,
+          height=button_height, bg='#FFC75F', font=("Helvetica")).grid(row=2, column=2)
 
-images[0].grid(row = 1, column = 0)
-images[1].grid(row = 1, column = 1)
+images[0].grid(row=1, column=0)
+images[1].grid(row=1, column=1)
+images[2].grid(row=1, column=2)
 
-images[0].config(image = img)
-images[1].config(image = img)
+images[0].config(image=img)
+images[1].config(image=img)
+images[2].config(image=img)
 
 root.mainloop()
 
@@ -89,7 +101,7 @@ root.mainloop()
 # 		self.title(title)
 # 		self.size = size
 # 		self.geometry(f'{self.size[0]}x{self.size[1]}')
-		
+
 # 	def set_widgets(self):
 # 		top_labels = tk.LabelFrame(self, width = self.size[0], height = 25).grid(row = 0, column = 0, columnspan = 2)
 # 		tk.Label(top_labels, text = "Original Image").grid(row = 0, column = 0)
@@ -112,7 +124,7 @@ root.mainloop()
 
 # 		tk.Button(self, text = "Load Image").grid(row = 2, column = 0),
 # 		tk.Button(self, text = "Generate Image").grid(row = 2, column = 1)
-		
+
 # 		self.images[0].grid(row = 1, column = 0)
 # 		self.images[1].grid(row = 1, column = 1)
 
