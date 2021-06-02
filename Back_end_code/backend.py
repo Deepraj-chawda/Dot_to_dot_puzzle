@@ -88,8 +88,8 @@ class Image_converter:
 # Driver code
 if __name__ == "__main__":
     img_con = Image_converter()
-    img = img_con.load_img('1.jpg')
+    img = img_con.load_img('2.jpg')
     img_con.save(img, 'back_white.png')
 
-    img = img_con.generate('1.jpg')
+    img = img_con.generate('2.jpg')
     img_con.save(img, 'Edge.png')
