@@ -1,4 +1,13 @@
-'''Python script to convert the given image
+'''
+Contributions: 
+1. Prof. Shraddha Sharma (PIEMR)
+2. Tejas Navalkhe
+3. Deepraj Chawda
+4. Harsh Narwariya
+5. Rajat Sharma
+
+
+Python script to convert the given image
     into a black and white and  dotted text using opencv
 '''
 
@@ -25,7 +34,7 @@ class Image_converter:
         # Apply median blur
         image = cv2.medianBlur(image, 5)
 
-        self.save(path="ResultImages/black_white.png", image=image)
+        return image
 
     def generate(self, path):
         '''
@@ -75,7 +84,7 @@ class Image_converter:
                 num), (y + 1, x - 3), cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, color=(0, 0, 0), thickness=1)
             num += 1
 
-        self.save(path="ResultImages/edge.png", image=edge_img)
+        return edge_img
 
     def save(self, image, path):
         '''
